@@ -10,7 +10,7 @@ export default function SearchBarComponent({ value, onChange }: Props) {
     <>
       <div className="flex justify-center my-4">
         <input
-          className="w-64 p-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
+          className="w-full max-w-md p-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
           type="text"
           value={value}
           onChange={onChange}

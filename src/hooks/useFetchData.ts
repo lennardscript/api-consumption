@@ -10,12 +10,14 @@ export default function useFetchData(url: string) {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        await new Promise((resolve) => setTimeout(resolve, 600))
         const response = await axios.get(url)
         setData(response.data)
         setLoading(false)
       } catch (err) {
         setError('Error al cargar los datos')
         toast.error('Error al cargar los datos')
+      } finally {
         setLoading(false)
       }
     }
