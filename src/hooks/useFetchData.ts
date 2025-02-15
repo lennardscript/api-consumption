@@ -15,7 +15,7 @@ export default function useFetchData(url: string) {
         setLoading(false)
       } catch (err) {
         setError('Error al cargar los datos')
-        toast.error('Error al carar los datos')
+        toast.error('Error al cargar los datos')
         setLoading(false)
       }
     }

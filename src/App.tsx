@@ -15,11 +15,9 @@ export default function App() {
   return (
     <>
       <div className="p-4">
-        <h1 className="text-2xl font-bold mb-4">Consumo de API</h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-          {filteredUsers.map((user) => (
-            <UserCardComponent key={user.id} user={user} />
-          ))}
+        <h1 className="text-2xl text-center font-bold mb-4">Consumo de API</h1>
+        <div className="mt-4">
+          <UserCardComponent users={filteredUsers} />
         </div>
       </div>
     </>
