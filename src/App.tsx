@@ -1,0 +1,28 @@
+import { useState } from "react";
+import useFetchData from "./hooks/useFetchData";
+import UserCardComponent from "./components/UserCardComponent";
+
+const API_URL = "https://jsonplaceholder.typicode.com/users";
+
+export default function App() {
+  const [searchTerm, setSearchTeam] = useState<string>("");
+  const { data, loading, error } = useFetchData(API_URL)
+
+  const filteredUsers = data.filter((user) =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <>
+      <div className="p-4">
+        <h1 className="text-2xl font-bold mb-4">Consumo de API</h1>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+          {filteredUsers.map((user) => (
+            <UserCardComponent key={user.id} user={user} />
+          ))}
+        </div>
+      </div>
+    </>
+  )
+}
+
