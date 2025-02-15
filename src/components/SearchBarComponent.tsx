@@ -8,13 +8,15 @@ interface Props {
 export default function SearchBarComponent({ value, onChange }: Props) {
   return (
     <>
-      <input
-        className="w-full p-2 border rounded"
-        type="text"
-        value={value}
-        onChange={onChange}
-        placeholder="Buscar por nombre..."
-      />
+      <div className="flex justify-center my-4">
+        <input
+          className="w-64 p-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
+          type="text"
+          value={value}
+          onChange={onChange}
+          placeholder="Buscar por nombre..."
+        />
+      </div>
     </>
   )
 }
