@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from 'react-toastify'
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
   const response = await axios.get("https://jsonplaceholder.typicode.com/users")
@@ -12,7 +13,7 @@ const userSlice = createSlice({
   initialState: {
     users: [],
     loading: false,
-    error: null,
+    error: null as string | null,
     currentPage: 1, // Estado para la paginación
     userPerPage: 5, // Número de usuarios por página
   },
@@ -32,6 +33,16 @@ const userSlice = createSlice({
       })
       .addCase(fetchUsers.rejected, (state) => {
         state.loading = false
+        state.error = "Error al cargar los datos"
+        toast.error("Error al cargar los datos. Compruebe la conexión de la API", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "colored"
+        })
       })
   }
 })
