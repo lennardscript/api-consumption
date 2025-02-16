@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
+import { fetchUsers, setCurrentPage } from "./store/userSlice";
+import { useAppDispatch, useAppSelector } from "./hooks";
 import UserCardComponent from "./components/UserCardComponent";
 import SearchBarComponent from "./components/SearchBarComponent";
 import SkeletronComponent from "./components/SkeletronComponent";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers, setCurrentPage } from "./store/userSlice";
 import PaginationComponent from "./components/PaginationComponent";
 
 export default function App() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [searchTerm, setSearchTeam] = useState<string>("");
 
   // Acceder el estado global de Redux
-  const { users, loading, currentPage, userPerPage } = useSelector(
+  const { users, loading, currentPage, userPerPage } = useAppSelector(
     (state: any) => state.users
   )
 

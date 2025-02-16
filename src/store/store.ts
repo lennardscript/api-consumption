@@ -6,3 +6,7 @@ export const store = configureStore({
     users: userReducer,
   }
 })
+
+// Exportar tipos de TypeScript
+export type RootState = ReturnType<typeof store.getState> // Tipo estado global
+export type AppDispatch = typeof store.dispatch // Tipo dispatch personalizado
