@@ -1,18 +1,38 @@
-import { useState } from "react";
-import useFetchData from "./hooks/useFetchData";
+import { useEffect, useState } from "react";
 import UserCardComponent from "./components/UserCardComponent";
 import SearchBarComponent from "./components/SearchBarComponent";
 import SkeletronComponent from "./components/SkeletronComponent";
-
-const API_URL = "https://jsonplaceholder.typicode.com/users";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers, setCurrentPage } from "./store/userSlice";
+import PaginationComponent from "./components/PaginationComponent";
 
 export default function App() {
+  const dispatch = useDispatch()
   const [searchTerm, setSearchTeam] = useState<string>("");
-  const { data, loading } = useFetchData(API_URL)
 
-  const filteredUsers = data.filter((user) =>
+  // Acceder el estado global de Redux
+  const { users, loading, currentPage, userPerPage } = useSelector(
+    (state: any) => state.users
+  )
+
+  useEffect(() => {
+    dispatch(fetchUsers())
+  }, [dispatch])
+
+  // Filtrar usuarios por término de busqueda
+  const filteredUsers = users.filter((user: any) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Paginación
+  const indexOfLastUser = currentPage * userPerPage
+  const indexOfFirstUser = indexOfLastUser - userPerPage
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser)
+
+  // Cambiar página
+  const paginate = (pageNumber: number) => {
+    dispatch(setCurrentPage(pageNumber))
+  }
 
   return (
     <>
@@ -26,8 +46,16 @@ export default function App() {
               No se encontro ningún usuario con el nombre "{searchTerm}".
             </p>
           )}
-          {filteredUsers.length > 0 && (
-            <UserCardComponent users={filteredUsers} />
+          {currentUsers.length > 0 && (
+            <>
+              <UserCardComponent users={currentUsers} />
+              <PaginationComponent
+                totalUsers={filteredUsers.length}
+                userPerPage={userPerPage}
+                currentPage={currentPage}
+                paginate={paginate}
+              />
+            </>
           )}
         </div>
       </div>
