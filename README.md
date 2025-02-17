@@ -13,6 +13,18 @@ $ npm install
 # Con pnpm
 $ pnpm install
 ```
+Una vez instalado las dependencias, ya puede correr el proyecto con los siguientes comandos, dependiendo de su gestor de
+paquetes de Node.js
+
+```
+$ npm run dev
+
+# Con pnpm
+$ pnpm run dev
+```
+
+Después de haberlo levantado el proyecto, debe ingresar en la siguiente URL: "localhost:5173"
+
 # API usada
 
 La API que fue usada para este proyecto es una API pública llamada JSONPlaceholder
