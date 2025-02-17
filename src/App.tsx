@@ -19,6 +19,11 @@ export default function App() {
     dispatch(fetchUsers())
   }, [dispatch])
 
+  // Restablecer la página actual cuando el término de búsqueda cambia
+  useEffect(() => {
+    dispatch(setCurrentPage(1))
+  }, [searchTerm, dispatch])
+
   // Filtrar usuarios por término de busqueda
   const filteredUsers = users.filter((user: any) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
